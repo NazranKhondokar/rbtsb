@@ -1,0 +1,55 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com'
+version = '0.0.4-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//Swagger
+	implementation "io.springfox:springfox-boot-starter:3.0.0"
+	//Validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	//Gson
+	implementation 'com.google.code.gson:gson:2.8.6'
+	//Security
+//	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	//Common Validation
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
+	//Model Conversion
+	implementation 'org.modelmapper:modelmapper:2.4.4'
+	//JSON
+	implementation "com.googlecode.json-simple:json-simple:1.1.1"
+	//Getter Setter Constructor
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	//MySQL
+	runtimeOnly 'mysql:mysql-connector-java'
+	//Spring Security
+	implementation 'org.springframework.security:spring-security-test'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	//JWT
+	implementation 'io.jsonwebtoken:jjwt:0.9.0'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+test {
+	useJUnitPlatform()
+}
