@@ -1,5 +1,7 @@
 package com.rbtsb.controllers;
 
+import com.rbtsb.dto.courier.CourierPriceDataDto;
+import com.rbtsb.dto.courier.CourierResponseDto;
 import com.rbtsb.entities.User;
 import com.rbtsb.repositories.RoleRepository;
 import com.rbtsb.repositories.UserRepository;
@@ -10,6 +12,7 @@ import com.rbtsb.responses.BasicResponse;
 import com.rbtsb.responses.LoginResponse;
 import com.rbtsb.responses.SignUpResponse;
 import com.rbtsb.security.JwtTokenProvider;
+import com.rbtsb.services.CourierService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -40,6 +43,7 @@ public class AuthController {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider tokenProvider;
+    private final CourierService courierService;
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginDto loginDto, HttpServletResponse response) {
@@ -58,6 +62,9 @@ public class AuthController {
         response.addHeader("tokenType", "Bearer");
 
         Optional<User> user = userRepository.findByMobileOrEmail(loginDto.getMobileOrEmail(), loginDto.getMobileOrEmail());
+
+        CourierPriceDataDto courierPriceDataDto = courierService.getCourier();
+        System.out.println(courierPriceDataDto.getRate());
 
         if (response.getStatus() == 200) {
             return ResponseEntity.ok(LoginResponse.from(user.get()));
