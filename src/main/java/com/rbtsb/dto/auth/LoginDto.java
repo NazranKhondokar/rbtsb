@@ -1,4 +1,4 @@
-package com.rbtsb.dto;
+package com.rbtsb.dto.auth;
 
 
 import javax.validation.constraints.NotBlank;

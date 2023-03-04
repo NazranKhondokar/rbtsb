@@ -39,6 +39,8 @@ dependencies {
 	//Getter Setter Constructor
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	//SQLServer
+	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
 	//MySQL
 	runtimeOnly 'mysql:mysql-connector-java'
 	//Spring Security
@@ -46,6 +48,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	//JWT
 	implementation 'io.jsonwebtoken:jjwt:0.9.0'
+	//FeignClient
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '3.0.3'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 }
