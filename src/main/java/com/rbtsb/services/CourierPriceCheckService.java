@@ -5,6 +5,6 @@ import com.rbtsb.entities.CourierPrice;
 
 public interface CourierPriceCheckService {
 
-    CourierPrice checkCourierPrice(CourierPriceCheckDto courierPriceCheckDto);
+    Object[] checkCourierPrice(CourierPriceCheckDto courierPriceCheckDto);
 }
 

@@ -1,9 +1,9 @@
 package com.rbtsb.services.implementations;
 
 import com.rbtsb.dto.CourierPriceCheckDto;
-import com.rbtsb.dto.courier.CourierPriceDataDto;
 import com.rbtsb.entities.CourierPrice;
 import com.rbtsb.repositories.CourierPriceRepository;
+import com.rbtsb.responses.CourierRateResponse;
 import com.rbtsb.services.CourierPriceCheckService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,12 +16,10 @@ public class CourierPriceCheckServiceImpl implements CourierPriceCheckService {
     private final CourierServiceImpl courierService;
 
     @Override
-    public CourierPrice checkCourierPrice(CourierPriceCheckDto courierPriceCheckDto) {
-        CourierPriceDataDto courierPriceDataDto = courierService.getCourierPrice(courierPriceCheckDto);
-
+    public Object[] checkCourierPrice(CourierPriceCheckDto courierPriceCheckDto) {
         CourierPrice courierPrice = courierPriceCheckDto.to();
-        courierPrice.setRate(courierPriceDataDto.getRate());
+        courierPriceRepository.save(courierPrice);
 
-        return courierPriceRepository.save(courierPrice);
+        return new Object[]{CourierRateResponse.to(courierService.getCourierPrice(courierPriceCheckDto))};
     }
 }

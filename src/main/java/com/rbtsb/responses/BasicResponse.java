@@ -1,5 +1,8 @@
 package com.rbtsb.responses;
 
+import lombok.Data;
+
+@Data
 public class BasicResponse {
 
     private boolean result;

@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.rbtsb.constant.ResponseStatus.ERROR;
 import static com.rbtsb.constant.ResponseStatus.SUCCESS;
+import static com.rbtsb.utils.ResponseBuilder.error;
 import static com.rbtsb.utils.ResponseBuilder.success;
+import static org.springframework.http.ResponseEntity.badRequest;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
@@ -28,7 +31,8 @@ public class CourierPriceController {
     @ApiOperation(value = "Courier Price check", response = String.class)
     public ResponseEntity<JSONObject> checkCourierPrice(@RequestBody CourierPriceCheckDto courierPriceCheckDto) {
 
-        courierPriceCheckService.checkCourierPrice(courierPriceCheckDto);
-        return ok(success(null, SUCCESS).getJson());
+        if (courierPriceCheckService.checkCourierPrice(courierPriceCheckDto).length != 0)
+            return ok(success(null, SUCCESS).getJson());
+        else return badRequest().body(error(null, ERROR).getJson());
     }
 }
