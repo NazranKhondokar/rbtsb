@@ -1,8 +1,5 @@
 package com.rbtsb.controllers;
 
-import com.rbtsb.clients.CourierClient;
-import com.rbtsb.dto.courier.CourierPriceDataDto;
-import com.rbtsb.dto.courier.CourierResponseDto;
 import com.rbtsb.entities.User;
 import com.rbtsb.repositories.RoleRepository;
 import com.rbtsb.repositories.UserRepository;
@@ -43,7 +40,6 @@ public class AuthController {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider tokenProvider;
-    private final CourierClient courierClient;
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginDto loginDto, HttpServletResponse response) {
