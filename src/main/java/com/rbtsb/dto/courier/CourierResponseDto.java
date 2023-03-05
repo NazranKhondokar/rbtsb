@@ -7,7 +7,5 @@ import java.util.List;
 @Data
 public class CourierResponseDto {
 
-    private CourierPriceDataDto data;
-    private List<Object> headers;
-    private Integer status;
+    private CourierReqDto req;
 }

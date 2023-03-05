@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(name = "CourierClient", configuration = FeignConfig.class, url = "${courierService}", decode404 = true)
 public interface CourierClient {
 
-    @PostMapping("wp-json/wp/v2/getShippingRate")
+    @RequestMapping(method = RequestMethod.POST, value = "wp-json/wp/v2/getShippingRate")
     CourierResponseDto getCourierPrice(@RequestParam("origin_country") String origin_country,
                                        @RequestParam("origin_state") String origin_state,
                                        @RequestParam("origin_postcode") int origin_postcode,

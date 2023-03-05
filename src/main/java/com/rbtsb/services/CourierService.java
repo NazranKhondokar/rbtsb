@@ -13,14 +13,14 @@ public class CourierService {
 
     private final CourierClient courierClient;
 
-    public CourierPriceDataDto getCourier() {
+    public CourierPriceDataDto getCourierPrice() {
         CourierResponseDto courierResponseDto = courierClient.getCourierPrice(
                 "MY", "Kuala Lumpur", 50250, "BD",
                 "Bangladesh", 50000, 10, 10, 10,
                 1, 10, 0);
-        if (courierResponseDto.getStatus() == 200)
-            return courierResponseDto.getData();
-        else throw new ResourceNotFoundException(String.valueOf(courierResponseDto.getStatus()));
+        if (courierResponseDto.getReq().getStatus() == 200)
+            return courierResponseDto.getReq().getData();
+        else throw new ResourceNotFoundException(String.valueOf(courierResponseDto.getReq().getStatus()));
     }
 }
 
