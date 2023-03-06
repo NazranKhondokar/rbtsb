@@ -50,6 +50,9 @@ public class CourierPrice {
     @Column(name = "DOCUMENT_WEIGHT")
     private Double documentWeight;
 
-    @Column(name = "RATE")
-    private Double rate;
+    @Column(name = "JT_RATE")
+    private Double jtRate;
+
+    @Column(name = "CITY_LINK_RATE")
+    private Double cityLinkRate;
 }

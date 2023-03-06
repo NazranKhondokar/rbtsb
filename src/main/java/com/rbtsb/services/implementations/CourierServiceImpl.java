@@ -33,6 +33,7 @@ public class CourierServiceImpl implements CourierService {
 
         if (courierResponseDto.getReq().getStatus() == 200)
             return courierResponseDto.getReq().getData();
-        else throw new ResourceNotFoundException(String.valueOf(courierResponseDto.getReq().getStatus()));
+        else return null;
+//        else throw new ResourceNotFoundException(String.valueOf(courierResponseDto.getReq().getStatus()));
     }
 }

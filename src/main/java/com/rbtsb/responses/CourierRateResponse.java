@@ -11,9 +11,9 @@ public class CourierRateResponse {
     private String courier;
     private Double rate;
 
-    public static CourierRateResponse to(CourierPriceDataDto courierPriceDataDto) {
+    public static CourierRateResponse to(String courierName, CourierPriceDataDto courierPriceDataDto) {
         CourierRateResponse courierRateResponse = new CourierRateResponse();
-        courierRateResponse.setCourier("citylinkexpress");
+        courierRateResponse.setCourier(courierName);
         courierRateResponse.setRate(courierPriceDataDto.getRate());
         return courierRateResponse;
     }
