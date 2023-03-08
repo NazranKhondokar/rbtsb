@@ -89,7 +89,7 @@ management:
       exposure:
         include: "*"
 
-courierService: ${courierServiceBaseUrl:https://www.citylinkexpress.com/}
+cityLinkService: ${cityLinkServiceBaseUrl:https://www.citylinkexpress.com/}
 #ftpFileUploadPath: /rbtsb-service
 
 #redis:

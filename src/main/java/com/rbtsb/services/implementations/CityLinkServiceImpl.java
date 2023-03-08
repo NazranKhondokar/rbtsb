@@ -1,10 +1,10 @@
 package com.rbtsb.services.implementations;
 
-import com.rbtsb.clients.CourierClient;
+import com.rbtsb.clients.CityLinkClient;
 import com.rbtsb.dto.CourierPriceCheckDto;
-import com.rbtsb.dto.courier.CourierPriceDataDto;
-import com.rbtsb.dto.courier.CourierResponseDto;
-import com.rbtsb.services.CourierService;
+import com.rbtsb.dto.citylink.CityLinkPriceDataDto;
+import com.rbtsb.dto.citylink.CourierResponseDto;
+import com.rbtsb.services.CityLinkService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,14 +14,14 @@ import static java.util.Objects.isNull;
 
 @Service
 @RequiredArgsConstructor
-public class CourierServiceImpl implements CourierService {
+public class CityLinkServiceImpl implements CityLinkService {
 
-    private final CourierClient courierClient;
-    Logger logger = LoggerFactory.getLogger(CourierServiceImpl.class);
+    private final CityLinkClient cityLinkClient;
+    private static final Logger logger = LoggerFactory.getLogger(CityLinkServiceImpl.class);
 
     @Override
-    public CourierPriceDataDto getCourierPrice(CourierPriceCheckDto courierPriceCheckDto) {
-        CourierResponseDto courierResponseDto = courierClient.getCourierPrice(
+    public CityLinkPriceDataDto getCourierPrice(CourierPriceCheckDto courierPriceCheckDto) {
+        CourierResponseDto courierResponseDto = cityLinkClient.getCourierPrice(
                 courierPriceCheckDto.getOriginCountry(),
                 courierPriceCheckDto.getOriginState(),
                 courierPriceCheckDto.getOriginPostcode(),

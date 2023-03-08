@@ -1,14 +1,14 @@
 package com.rbtsb.clients;
 
 import com.rbtsb.config.FeignConfig;
-import com.rbtsb.dto.courier.CourierResponseDto;
+import com.rbtsb.dto.citylink.CourierResponseDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "CourierClient", configuration = FeignConfig.class, url = "${courierService}", decode404 = true)
-public interface CourierClient {
+@FeignClient(name = "CityLinkClient", configuration = FeignConfig.class, url = "${cityLinkService}", decode404 = true)
+public interface CityLinkClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "wp-json/wp/v2/getShippingRate")
     CourierResponseDto getCourierPrice(@RequestParam("origin_country") String origin_country,

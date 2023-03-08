@@ -4,7 +4,7 @@ import com.rbtsb.dto.CourierPriceCheckDto;
 import com.rbtsb.repositories.CourierPriceRepository;
 import com.rbtsb.responses.CourierRateResponse;
 import com.rbtsb.services.implementations.CourierPriceCheckServiceImpl;
-import com.rbtsb.services.implementations.CourierServiceImpl;
+import com.rbtsb.services.implementations.CityLinkServiceImpl;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,7 +28,7 @@ public class CourierPriceCheckServiceTest {
     private CourierPriceRepository courierPriceRepository;
 
     @Mock
-    private CourierServiceImpl courierService;
+    private CityLinkServiceImpl courierService;
 
     @InjectMocks
     private CourierPriceCheckServiceImpl courierPriceCheckService;

@@ -1,9 +1,9 @@
-package com.rbtsb.dto.courier;
+package com.rbtsb.dto.citylink;
 
 import lombok.Data;
 
 @Data
-public class CourierPriceDataDto {
+public class CityLinkPriceDataDto {
 
     private Double rate;
     private String code;

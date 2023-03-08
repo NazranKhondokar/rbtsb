@@ -1,6 +1,6 @@
 package com.rbtsb.responses;
 
-import com.rbtsb.dto.courier.CourierPriceDataDto;
+import com.rbtsb.dto.citylink.CityLinkPriceDataDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,10 +11,10 @@ public class CourierRateResponse {
     private String courier;
     private Double rate;
 
-    public static CourierRateResponse to(String courierName, CourierPriceDataDto courierPriceDataDto) {
+    public static CourierRateResponse to(String courierName, Double rate) {
         CourierRateResponse courierRateResponse = new CourierRateResponse();
         courierRateResponse.setCourier(courierName);
-        courierRateResponse.setRate(courierPriceDataDto.getRate());
+        courierRateResponse.setRate(rate);
         return courierRateResponse;
     }
 }
