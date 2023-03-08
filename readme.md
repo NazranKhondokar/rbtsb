@@ -42,7 +42,7 @@ Login: `auth/login`
   "password": "string"
 }
 ```
-Will get JWT token at Response Header.
+Will get JWT token at Response Header. Then authorize with 'Bearer Token'
 
 ## Check Courier Price: `courier-price/check`
 
