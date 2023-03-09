@@ -22,11 +22,6 @@ spring:
 #    username: sa
 #    password: Nazran@123
     # local
-#    url: jdbc:sqlserver://192.168.1.20:1433;databaseName=IEIMS_DEV_FS_NAZRAN_MINTO
-#    username: ieims_dev
-#    password: "Ie!mSd(v21"
-#
-#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     url: jdbc:mysql://localhost:3306/rbtsb
     username: root
     password: root
