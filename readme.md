@@ -64,6 +64,30 @@ Will get JWT token at Response Header. Then authorize with `Bearer Token`
 ```
 Will get desired response.
 
+```bash
+docker-compose build --no-cache app && docker-compose up
+```
+
+This command will run redis and mssql.
+
+Please make sure you've added the database `rbtsb` either into the container or via any mssql client like dbeaver.
+
+If you want to create that `rbtsb` database from the mssql container, you need to do the following:
+
+```sh
+docker exec -it <container_id|container_name> /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P <your_password>
+
+# sqlcmd
+> CREATE DATABASE rbtsb;
+> GO
+```
+
+To see the `container_id`, open another terminal while running the spring boot app and hit this command and you will be able to see the mssql container's id listed
+
+```sh
+docker ps
+```
+
 ## Author
 
 - [Nazran Khondokar][author]
