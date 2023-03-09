@@ -1,0 +1,20 @@
+# Gradle files
+.gradle/
+build/
+
+# Maven files
+.mvn/
+target/
+
+# IDE files
+.idea/
+*.iml
+
+# Logs
+logs/
+*.log
+
+# Test results
+test-results/
+jacoco.exec
+
