@@ -25,11 +25,13 @@ public class JTServiceImpl implements JTService {
         Connection.Response response = Jsoup
                 .connect("https://www.jtexpress.my/shipping-rates")
                 .method(Connection.Method.GET)
+                .referrer("https://www.jtexpress.my/shipping-rates")
                 .execute();
         logger.info(response.statusMessage());
 
         Document serviceResponse = Jsoup
                 .connect("https://www.jtexpress.my/shipping-rates")
+                .referrer("https://www.jtexpress.my/shipping-rates")
                 .userAgent("Mozilla/5.0")
                 .timeout(10 * 1000)
                 .cookies(response.cookies())
@@ -43,7 +45,8 @@ public class JTServiceImpl implements JTService {
                 .data("weight", String.valueOf(courierPriceCheckDto.getParcelWeight()))
                 .data("shipping_type", "EZ")
                 .data("item_value", "")
-                .data("_token", "7TPyEpnxbA4UULnxgt1ATreN1KUrUop1x760Cglj")
+                .data("_token", "1QJVq9RYvOxzgS09f43mWLMc5iL5Fi4hMyuysbLw")
+                .method(Connection.Method.POST)
                 .post();
 
         JTPriceDataDto jtPriceDataDto = new JTPriceDataDto();

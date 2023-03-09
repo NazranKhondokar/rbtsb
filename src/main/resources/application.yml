@@ -22,16 +22,16 @@ spring:
 #    username: sa
 #    password: Nazran@123
     # local
-    url: jdbc:sqlserver://192.168.1.20:1433;databaseName=IEIMS_DEV_FS_NAZRAN_MINTO
-    username: ieims_dev
-    password: "Ie!mSd(v21"
-
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-#    url: jdbc:mysql://localhost:3306/rbtsb
-#    username: root
-#    password: root
+#    url: jdbc:sqlserver://192.168.1.20:1433;databaseName=IEIMS_DEV_FS_NAZRAN_MINTO
+#    username: ieims_dev
+#    password: "Ie!mSd(v21"
 #
-#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:mysql://localhost:3306/rbtsb
+    username: root
+    password: root
+
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
     # Hikari Configuration
     hikari:
@@ -49,8 +49,8 @@ spring:
       # Hibernate Properties
       # The SQL dialect makes Hibernate generate better SQL for the chosen database
       hibernate:
-#        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-        dialect: org.hibernate.dialect.SQLServer2012Dialect
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+#        dialect: org.hibernate.dialect.SQLServer2012Dialect
         naming:
           implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
           physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
