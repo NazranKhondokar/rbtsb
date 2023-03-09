@@ -31,15 +31,15 @@ public class CourierPriceCheckServiceImpl implements CourierPriceCheckService {
     public List<CourierRateResponse> checkCourierPrice(CourierPriceCheckDto courierPriceCheckDto) {
 
         List<CourierRateResponse> courierRateResponses = new ArrayList<>();
-//        CityLinkPriceDataDto cityLinkPriceDataDto = cityLinkService.getCourierPrice(courierPriceCheckDto);
+        CityLinkPriceDataDto cityLinkPriceDataDto = cityLinkService.getCourierPrice(courierPriceCheckDto);
 
         CourierPrice courierPrice = courierPriceCheckDto.to();
 
-//        if (nonNull(cityLinkPriceDataDto)) {
-//            logger.info("CityLink express rate is " + cityLinkPriceDataDto.getRate());
-//            courierPrice.setCityLinkRate(cityLinkPriceDataDto.getRate());
-//            courierRateResponses.add(CourierRateResponse.to("citylink", cityLinkPriceDataDto.getRate()));
-//        } else logger.warn("CityLink express data is null");
+        if (nonNull(cityLinkPriceDataDto)) {
+            logger.info("CityLink express rate is " + cityLinkPriceDataDto.getRate());
+            courierPrice.setCityLinkRate(cityLinkPriceDataDto.getRate());
+            courierRateResponses.add(CourierRateResponse.to("citylink", cityLinkPriceDataDto.getRate()));
+        } else logger.warn("CityLink express data is null");
 
         try {
             JTPriceDataDto jtPriceDataDto = jtService.getCourierPrice(courierPriceCheckDto);
@@ -50,7 +50,7 @@ public class CourierPriceCheckServiceImpl implements CourierPriceCheckService {
         } catch (IOException e) {
             logger.error(e.getMessage());
         }
-//        courierPriceRepository.save(courierPrice);
+        courierPriceRepository.save(courierPrice);
         return courierRateResponses;
     }
 }
