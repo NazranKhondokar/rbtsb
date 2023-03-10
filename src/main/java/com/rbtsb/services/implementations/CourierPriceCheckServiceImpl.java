@@ -30,27 +30,35 @@ public class CourierPriceCheckServiceImpl implements CourierPriceCheckService {
 
     @Override
     public List<CourierRateResponse> checkCourierPrice(CourierPriceCheckDto courierPriceCheckDto) {
-        List<CourierRateResponse> courierRateResponses = new ArrayList<>();
 
         List<CourierPrice> courierPrices = getCourierPrices(courierPriceCheckDto);
         logger.info("courierPrices {}", courierPrices);
 
         CourierPrice courierPrice = courierPriceCheckDto.to();
 
+        return generateResponse(courierPriceCheckDto, courierPrices, courierPrice);
+    }
+
+    private List<CourierRateResponse> generateResponse(CourierPriceCheckDto courierPriceCheckDto, List<CourierPrice> courierPrices, CourierPrice courierPrice) {
+        List<CourierRateResponse> courierRateResponses = new ArrayList<>();
+        boolean isDataFetched = false;
+
         if (courierPrices.isEmpty()) {
             logger.info("courierPrices is empty");
-            getCityLinkRate(courierPriceCheckDto, courierRateResponses, courierPrice);
-            getJTRate(courierPriceCheckDto, courierRateResponses, courierPrice);
-            courierPriceRepository.save(courierPrice);
+            isDataFetched = getCityLinkRate(courierPriceCheckDto, courierRateResponses, courierPrice);
+            isDataFetched = getJTRate(courierPriceCheckDto, courierRateResponses, courierPrice);
+            if (isDataFetched) courierPriceRepository.save(courierPrice);
         } else {
             logger.info("courierPrices is not empty");
             if (isNull(courierPrices.get(0).getCityLinkRate()))
-                getCityLinkRate(courierPriceCheckDto, courierRateResponses, courierPrice);
+                isDataFetched = getCityLinkRate(courierPriceCheckDto, courierRateResponses, courierPrice);
             else courierRateResponses.add(CourierRateResponse.to("citylink", courierPrices.get(0).getCityLinkRate()));
 
             if (isNull(courierPrices.get(0).getJtRate()))
-                getJTRate(courierPriceCheckDto, courierRateResponses, courierPrice);
+                isDataFetched = getJTRate(courierPriceCheckDto, courierRateResponses, courierPrice);
             else courierRateResponses.add(CourierRateResponse.to("jt", courierPrices.get(0).getJtRate()));
+
+            if (isDataFetched) courierPriceRepository.save(courierPrice);
         }
         return courierRateResponses;
     }
@@ -67,25 +75,34 @@ public class CourierPriceCheckServiceImpl implements CourierPriceCheckService {
                 courierPriceCheckDto.getParcelWeight());
     }
 
-    private void getCityLinkRate(CourierPriceCheckDto courierPriceCheckDto, List<CourierRateResponse> courierRateResponses, CourierPrice courierPrice) {
+    private boolean getCityLinkRate(CourierPriceCheckDto courierPriceCheckDto, List<CourierRateResponse> courierRateResponses, CourierPrice courierPrice) {
         CityLinkPriceDataDto cityLinkPriceDataDto = cityLinkService.getCourierPrice(courierPriceCheckDto);
 
         if (nonNull(cityLinkPriceDataDto)) {
             logger.info("CityLink express rate is " + cityLinkPriceDataDto.getRate());
             courierPrice.setCityLinkRate(cityLinkPriceDataDto.getRate());
             courierRateResponses.add(CourierRateResponse.to("citylink", cityLinkPriceDataDto.getRate()));
-        } else logger.warn("CityLink express data is null");
+            return true;
+        } else {
+            logger.warn("CityLink express data is null");
+            return false;
+        }
     }
 
-    private void getJTRate(CourierPriceCheckDto courierPriceCheckDto, List<CourierRateResponse> courierRateResponses, CourierPrice courierPrice) {
+    private boolean getJTRate(CourierPriceCheckDto courierPriceCheckDto, List<CourierRateResponse> courierRateResponses, CourierPrice courierPrice) {
         try {
             JTPriceDataDto jtPriceDataDto = jtService.getCourierPrice(courierPriceCheckDto);
             if (nonNull(jtPriceDataDto.getTotalRate())) {
                 courierPrice.setJtRate(jtPriceDataDto.getTotalRate());
                 courierRateResponses.add(CourierRateResponse.to("jt", jtPriceDataDto.getTotalRate()));
-            } else logger.warn("JT data is null");
+                return true;
+            } else {
+                logger.warn("JT data is null");
+                return false;
+            }
         } catch (IOException e) {
             logger.error(e.getMessage());
+            return false;
         }
     }
 }

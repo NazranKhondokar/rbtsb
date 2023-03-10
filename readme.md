@@ -2,7 +2,7 @@
   <h1>Digital Backend Assignment Documentation</h1>
 </div>
 
-## Create a database for auth purpose on MySQL/MsSQL
+## Create a database for auth purpose on MySQL
 
 ```bash
 CREATE DATABASE rbstb;
@@ -46,6 +46,8 @@ Will get JWT token at Response Header. Then authorize with `Bearer Token`
 
 ## Check Courier Price: `courier-price/check`
 
+It's a dummy request to submit
+
 ```bash
 {
   "destinationCountry": "BD",
@@ -63,6 +65,8 @@ Will get JWT token at Response Header. Then authorize with `Bearer Token`
 }
 ```
 Will get desired response.
+
+## Docker Configuration: 
 
 ```bash
 docker-compose build --no-cache app && docker-compose up
