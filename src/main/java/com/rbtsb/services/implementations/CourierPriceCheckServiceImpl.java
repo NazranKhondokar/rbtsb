@@ -41,24 +41,25 @@ public class CourierPriceCheckServiceImpl implements CourierPriceCheckService {
 
     private List<CourierRateResponse> generateResponse(CourierPriceCheckDto courierPriceCheckDto, List<CourierPrice> courierPrices, CourierPrice courierPrice) {
         List<CourierRateResponse> courierRateResponses = new ArrayList<>();
-        boolean isDataFetched = false;
+        boolean isCityLinkDataFetched = false;
+        boolean isJTDataFetched = false;
 
         if (courierPrices.isEmpty()) {
             logger.info("courierPrices is empty");
-            isDataFetched = getCityLinkRate(courierPriceCheckDto, courierRateResponses, courierPrice);
-            isDataFetched = getJTRate(courierPriceCheckDto, courierRateResponses, courierPrice);
-            if (isDataFetched) courierPriceRepository.save(courierPrice);
+            isCityLinkDataFetched = getCityLinkRate(courierPriceCheckDto, courierRateResponses, courierPrice);
+            isJTDataFetched = getJTRate(courierPriceCheckDto, courierRateResponses, courierPrice);
+            if (isCityLinkDataFetched || isJTDataFetched) courierPriceRepository.save(courierPrice);
         } else {
             logger.info("courierPrices is not empty");
             if (isNull(courierPrices.get(0).getCityLinkRate()))
-                isDataFetched = getCityLinkRate(courierPriceCheckDto, courierRateResponses, courierPrice);
+                isCityLinkDataFetched = getCityLinkRate(courierPriceCheckDto, courierRateResponses, courierPrice);
             else courierRateResponses.add(CourierRateResponse.to("citylink", courierPrices.get(0).getCityLinkRate()));
 
             if (isNull(courierPrices.get(0).getJtRate()))
-                isDataFetched = getJTRate(courierPriceCheckDto, courierRateResponses, courierPrice);
+                isJTDataFetched = getJTRate(courierPriceCheckDto, courierRateResponses, courierPrice);
             else courierRateResponses.add(CourierRateResponse.to("jt", courierPrices.get(0).getJtRate()));
 
-            if (isDataFetched) courierPriceRepository.save(courierPrice);
+            if (isCityLinkDataFetched || isJTDataFetched) courierPriceRepository.save(courierPrice);
         }
         return courierRateResponses;
     }
