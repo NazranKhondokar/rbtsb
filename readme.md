@@ -68,6 +68,17 @@ Will get desired response.
 
 ## Docker Configuration: 
 
+Install MSSql
+
+```bash
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Nazran@123" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest
+```
+
+Install Redis
+```bash
+docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
+```
+
 ```bash
 docker-compose build --no-cache app && docker-compose up
 ```
