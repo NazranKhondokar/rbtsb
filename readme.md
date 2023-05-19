@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>Digital Backend Assignment Documentation</h1>
+  <h1>JWT Auth, JUnit Test, Docker</h1>
 </div>
 
 ## Create a database for auth purpose on MySQL
