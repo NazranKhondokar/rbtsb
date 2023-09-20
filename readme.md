@@ -4,11 +4,11 @@
 
 ## Create a database for auth purpose on MySQL
 
-```bash
+```mysql
 CREATE DATABASE rbstb;
 ```
 
-```bash
+```mysql
 INSERT INTO rbstb.ROLES (ROLE_NAME, STATUS_NAME) VALUES ('ROLE_ADMIN','ACTIVE');
 ```
 Then run the application.
@@ -18,7 +18,7 @@ Your Swagger-UI will be running on [localhost:5000/swagger-ui/][running-url]
 
 Register a user: `auth/register`
 
-```bash
+```json
 {
   "active": true,
   "email": "nazran91@gmail.com",
@@ -36,7 +36,7 @@ Register a user: `auth/register`
 ```
 Login: `auth/login`
 
-```bash
+```json
 {
   "mobileOrEmail": "01714516763",
   "password": "string"
@@ -48,7 +48,7 @@ Will get JWT token at Response Header. Then authorize with `Bearer Token`
 
 It's a dummy request to submit
 
-```bash
+```json
 {
   "destinationCountry": "BD",
   "destinationPostcode": 50000,
